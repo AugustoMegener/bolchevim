@@ -1,6 +1,6 @@
 # Nixvim
 
-Standalone Nixvim migrated from `~/.config/nixos/home/nvim`.
+My nixvim flake.
 
 ## Layout
 
