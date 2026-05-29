@@ -97,7 +97,7 @@ require("lualine").setup({
     },
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = {
-      "filename",
+      -- "filename",
       {
         function()
           return require("noice").api.status.command.get()

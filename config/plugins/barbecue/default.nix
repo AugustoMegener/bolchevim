@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
   plugins.barbecue = {
-    enable = false;
+    enable = true;
     settings = {
       theme = lib.nixvim.mkRaw ''
         {
