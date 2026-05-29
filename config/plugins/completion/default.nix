@@ -9,18 +9,12 @@
   ];
 
   plugins.nvim-autopairs.enable = true;
+  plugins.luasnip.enable = true;
 
   plugins.cmp = {
     enable = true;
     autoEnableSources = true;
     settings = {
-      snippet = {
-        expand = lib.nixvim.mkRaw ''
-          function(args)
-            luasnip.lsp_expand(args.body)
-          end
-        '';
-      };
       mapping = {
         "<C-g>" = "cmp.mapping.scroll_docs(-4)";
         "<C-f>" = "cmp.mapping.scroll_docs(4)";
