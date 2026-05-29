@@ -17,7 +17,7 @@ local gruvbox = {
     b = { fg = colors.fg0, bg = colors.bg3 },
     c = { fg = colors.fg0, bg = colors.bg1 },
   },
-insert = {
+  insert = {
     a = { fg = colors.bg1, bg = colors.green, gui = "bold" },
   },
   visual = {
@@ -96,7 +96,7 @@ require("lualine").setup({
       "mode",
     },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { 
+    lualine_c = {
       "filename",
       {
         function()
@@ -106,7 +106,7 @@ require("lualine").setup({
           return require("noice").api.status.command.has()
         end,
       },
-    }, 
+    },
     lualine_x = { "filetype" },
     lualine_y = { "progress" },
     lualine_z = {
@@ -137,7 +137,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     local color = mode_cursor_colors[vim.fn.mode()] or "#f29554"
     vim.api.nvim_set_hl(0, "Cursor", { fg = "NONE", bg = color })
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = color, bold = true })
-    vim.api.nvim_set_hl(0, "SmearCursorHideable", { fg = "none", bg = color, blend = 0 }) 
+    vim.api.nvim_set_hl(0, "SmearCursorHideable", { fg = "none", bg = color, blend = 0 })
     require("smear_cursor.color").clear_cache()
   end,
 })

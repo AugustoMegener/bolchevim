@@ -1,10 +1,5 @@
 { ... }:
 
-{
-    plugins.cmp.enable = true;
-
-    plugins.obsidian = {
-        enable = true;
         settings = {
             workspaces = [
             {

@@ -5,7 +5,6 @@
     ./completion
     ./explorer
     ./editing
-    ./git
     ./navic
     ./notify
     ./lsp
@@ -16,9 +15,7 @@
     ./bufferline
     ./trouble
     ./lint
-    ./session
     ./cord
-    ./image_preview
     ./image
     ./firenvim
     ./vim-move

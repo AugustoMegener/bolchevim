@@ -1,11 +1,15 @@
 { lib, ... }:
 {
   keymaps = [
-{
-  mode = "n";
-  key = "<Esc>";
-  action = lib.nixvim.mkRaw "function() vim.fn.setreg('/', '') vim.cmd('noh') end";
-}
+    {
+      mode = "n";
+      key = "<Esc>";
+      action = lib.nixvim.mkRaw "function() vim.fn.setreg('/', '') vim.cmd('noh') end";
+    }
+		{ mode = ""; key = "<Up>"; action = "<Nop>"; }
+		{ mode = ""; key = "<Down>"; action = "<Nop>"; }
+		{ mode = ""; key = "<Left>"; action = "<Nop>"; }
+		{ mode = ""; key = "<Right>"; action = "<Nop>"; }
     {
       mode = "n";
       key = "<Space>";

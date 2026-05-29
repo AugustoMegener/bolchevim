@@ -7,6 +7,8 @@
     nvim-web-devicons
   ];
 
+  plugins.web-devicons.enable = true;
+
   extraPackages = with pkgs; [
     git
   ];
