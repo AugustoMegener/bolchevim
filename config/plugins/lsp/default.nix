@@ -39,6 +39,12 @@ in
           };
         };
       };
+
+      rust_analyzer = {
+        enable = true;
+        installCargo = false;
+        installRustc = false;
+      };
       
       qmlls = {
         enable = true;
@@ -96,6 +102,8 @@ in
     };
   };
   extraConfigLua = ''
+    vim.lsp.enable("rust_analyzer")
+
     vim.lsp.handlers["workspace/configuration"] = function(_, params, ctx)
       local client = vim.lsp.get_client_by_id(ctx.client_id)
       if not client then return {} end
