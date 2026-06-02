@@ -21,5 +21,6 @@
     ./vim-move
     ./dashboard
     ./smear-cursor
+    ./which-key
   ];
 }
