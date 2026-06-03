@@ -84,7 +84,7 @@
     }
     {
       mode = "n";
-      key = "<leader>f";
+      key = "<leader>fm";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.format() end";
     }
     {
@@ -144,26 +144,5 @@
       action = "<cmd>DapToggleBreakpoint<cr>";
     }
 
-
-    {
-      mode = "n";
-      key = "<Tab>";
-      action = "<cmd>BufferLineCycleNext<cr>";
-    }
-    {
-      mode = "n";
-      key = "<S-Tab>";
-      action = "<cmd>BufferLineCyclePrev<cr>";
-    }
-    {
-      mode = "n";
-      key = "<leader>cb";
-      action = "<cmd>BufferLinePickClose<cr>";
-    }
-    {
-      mode = "n";
-      key = "<leader>cob";
-      action = "<cmd>BufferLineCloseOthers<cr>";
-    }
   ];
 }
