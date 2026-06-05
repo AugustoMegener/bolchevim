@@ -59,17 +59,17 @@
     }
     {
       mode = "n";
-      key = "gd";
+      key = "<leader>gd";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.definition() end";
     }
     {
       mode = "n";
-      key = "gr";
+      key = "<leader>gr";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.references() end";
     }
     {
       mode = "n";
-      key = "gi";
+      key = "<leader>gi";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.implementation() end";
     }
     {
@@ -143,6 +143,18 @@
       key = "<leader>bp";
       action = "<cmd>DapToggleBreakpoint<cr>";
     }
+
+    {
+      mode = "n";
+      key = "<Tab>";
+      action = "<cmd>BufferLineCycleNext<cr>";
+    }
+    {
+      mode = "n";
+      key = "<Tab>";
+      action = "<cmd>BufferLineCyclePrev<cr>";
+    }
+
 
   ];
 }

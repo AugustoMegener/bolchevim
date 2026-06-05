@@ -22,5 +22,6 @@
     ./dashboard
     ./smear-cursor
     ./which-key
+    ./fzf-lua
   ];
 }
