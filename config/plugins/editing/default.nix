@@ -1,4 +1,4 @@
-	    settings = {
+{ pkgs, ... }:
 {
   plugins.vim-surround.enable = true;
 
