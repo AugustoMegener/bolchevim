@@ -151,7 +151,7 @@
     }
     {
       mode = "n";
-      key = "<Tab>";
+      key = "<S-Tab>";
       action = "<cmd>BufferLineCyclePrev<cr>";
     }
 
