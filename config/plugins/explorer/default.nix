@@ -32,7 +32,11 @@
         };
       };
       splitjoin = {
-
+        mappings = {
+          toggle = "gS";
+          split = "";
+          join = "";
+        };
       };
     };
   };
