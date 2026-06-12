@@ -154,6 +154,16 @@
       key = "<S-Tab>";
       action = "<cmd>BufferLineCyclePrev<cr>";
     }
+    {
+      mode = "n";
+      key = "<leader><Esc>";
+      action = ":q<cr>";
+    }
+    {
+      mode = "n";
+      key = "\\";
+      action = ":s/";
+    }
 
 
   ];

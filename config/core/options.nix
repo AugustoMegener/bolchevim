@@ -117,6 +117,57 @@ if vim.g.started_by_firenvim then
   })
 end
 
+local ns = vim.api.nvim_create_namespace("escape_conceals")
+
+local patterns = {
+  { pat = "\\n", icon = "↵" },
+  { pat = "\\0", icon = "󰨿" },
+  { pat = "->", icon = " " }
+  { pat = "=>", icon = " " }
+  { pat = "()", icon = " " }
+  { pat = "==", icon = " "}
+  { pat = "=>", icon = " "}
+  { pat = "=<", icon = " " }
+  { pat = "!=", icon = " "}
+}
+
+
+local defined = table.concat(vim.tbl_map(function(e) return e.pat:sub(2) end, patterns))
+
+vim.cmd(string.format([[
+  syntax match myEscapeSlash /\\\ze[^%s]/ conceal
+  syntax match myEscapeChar /\\\zs[^%s]/
+]], defined, defined))
+
+
+local function apply(bufnr)
+  vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+  for lnum, line in ipairs(lines) do
+    for _, entry in ipairs(patterns) do
+      local s = 1
+      while true do
+        local start, finish = line:find(entry.pat, s, true)
+        if not start then break end
+        vim.api.nvim_buf_set_extmark(bufnr, ns, lnum - 1, start - 1, {
+          end_col = finish,
+          conceal = "",
+          virt_text = {{ entry.icon, "Special" }},
+          virt_text_pos = "inline",
+        })
+        s = finish + 1
+      end
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
+  callback = function(ev)
+    apply(ev.buf)
+  end,
+})
+
 end
   '';
 }
