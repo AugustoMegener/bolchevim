@@ -120,7 +120,7 @@ local patterns = {
           vim.api.nvim_buf_set_extmark(bufnr, ns, lnum - 1, start - 1, {
             end_col = finish,
             conceal = "",
-            virt_text = {{ entry.icon, "Special" }},
+            virt_text = {{ entry.icon, "" }},
             virt_text_pos = "inline",
           })
           s = finish + 1
