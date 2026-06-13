@@ -107,6 +107,11 @@ if vim.g.started_by_firenvim then
   })]]
 
 if vim.g.started_by_firenvim then
+  vim.opt.guifont = "Go Mono Nerd Font:h9"
+  vim.opt.laststatus = 0
+  vim.opt.showtabline = 0
+
+  require("barbecue").setup({ enabled = false })
   require("noice").setup({
     routes = {
       {
@@ -122,13 +127,12 @@ local ns = vim.api.nvim_create_namespace("escape_conceals")
 local patterns = {
   { pat = "\\n", icon = "↵" },
   { pat = "\\0", icon = "󰨿" },
-  { pat = "->", icon = " " }
-  { pat = "=>", icon = " " }
-  { pat = "()", icon = " " }
-  { pat = "==", icon = " "}
-  { pat = "=>", icon = " "}
-  { pat = "=<", icon = " " }
-  { pat = "!=", icon = " "}
+  { pat = "->", icon = " " },
+  { pat = "=>", icon = " " },
+  { pat = "()", icon = " " },
+  { pat = "==", icon = " " },
+  { pat = "=<", icon = " " },
+  { pat = "!=", icon = " " },
 }
 
 
