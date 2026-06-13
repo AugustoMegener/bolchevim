@@ -102,15 +102,8 @@ local patterns = {
 
 }
 
-local function get_hl(bufnr, lnum, col)
-  local captures = vim.treesitter.get_captures_at_pos(bufnr, lnum, col)
-  if #captures > 0 then
-    return "@" .. captures[#captures].capture
-  end
-  return "Normal"
-end
-
 local function apply(bufnr, top, bot)
+  vim.api.nvim_buf_clear_namespace(bufnr, ns, top, bot)
   local lines = vim.api.nvim_buf_get_lines(bufnr, top, bot, false)
   local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
 
@@ -122,15 +115,11 @@ local function apply(bufnr, top, bot)
         while true do
           local start, finish = line:find(entry.pat, s, true)
           if not start then break end
-
-          local hl_name = vim.fn.synIDattr(vim.fn.synID(lnum + 1, start, 1), "name")
-          if hl_name == "" then hl_name = "Normal" end
-
           vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
             end_col = finish,
-            virt_text = {{ entry.icon, hl_name }},
+            conceal = "",
+            virt_text = {{ entry.icon, "" }},
             virt_text_pos = "inline",
-            ephemeral = true,
           })
           s = finish + 1
         end
