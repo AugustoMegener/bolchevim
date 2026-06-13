@@ -130,7 +130,6 @@ local function apply(bufnr, top, bot)
             end_col = finish,
             virt_text = {{ entry.icon, hl_name }},
             virt_text_pos = "inline",
-            conceal = "",
             ephemeral = true,
           })
           s = finish + 1
