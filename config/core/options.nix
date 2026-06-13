@@ -103,37 +103,36 @@ local patterns = {
 }
 
 
-  local defined = table.concat(vim.tbl_map(function(e) return e.pat:sub(2) end, patterns))
-  vim.cmd(string.format([[
-    syntax match myEscapeSlash /\\\ze[^%s]/ conceal
-    syntax match myEscapeChar /\\\zs[^%s]/
-  ]], defined, defined))
+local function apply(bufnr, top, bot)
+  local lines = vim.api.nvim_buf_get_lines(bufnr, top, bot, false)
+  local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
 
-  local function apply(bufnr)
-    vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
-    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    for lnum, line in ipairs(lines) do
+  for i, line in ipairs(lines) do
+    local lnum = top + i - 1
+    if lnum ~= cursor_row then
       for _, entry in ipairs(patterns) do
         local s = 1
         while true do
           local start, finish = line:find(entry.pat, s, true)
           if not start then break end
-          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum - 1, start - 1, {
+          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
             end_col = finish,
-            conceal = "",
             virt_text = {{ entry.icon, "" }},
             virt_text_pos = "inline",
+            conceal = "",
+            ephemeral = true,
           })
           s = finish + 1
         end
       end
     end
   end
+end
 
-  vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
-    callback = function(ev)
-      apply(ev.buf)
-    end,
-  })
+vim.api.nvim_set_decoration_provider(ns, {
+  on_win = function(_, _, bufnr, topline, botline)
+    apply(bufnr, topline, botline)
+  end,
+})
 '';
 }
