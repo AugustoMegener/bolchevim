@@ -102,16 +102,11 @@ local patterns = {
 
 }
 local function get_hl(bufnr, lnum, col)
-  local ok, captures = pcall(vim.treesitter.get_captures_at_pos, bufnr, lnum, col)
-  if ok and #captures > 0 then
-    for i = #captures, 1, -1 do
-      local hl = "@" .. captures[i].capture .. "." .. captures[i].lang
-      if pcall(vim.api.nvim_get_hl, 0, { name = hl, link = false }) then
-        return hl
-      end
-    end
-    return "@" .. captures[#captures].capture
-  end
+  local hl_id = vim.api.nvim_buf_call(bufnr, function()
+    return vim.fn.synID(lnum + 1, col + 1, 1)
+  end)
+  local name = vim.fn.synIDattr(hl_id, "name")
+  if name ~= "" then return name end
   return ""
 end
 local function apply(bufnr, top, bot, winid)
