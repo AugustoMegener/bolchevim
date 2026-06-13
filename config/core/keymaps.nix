@@ -160,7 +160,7 @@
       action = ":q<cr>";
     }
     {
-      mode = "n";
+      mode = "v";
       key = "\\";
       action = ":s/";
     }
