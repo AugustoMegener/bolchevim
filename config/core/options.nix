@@ -95,7 +95,7 @@ local patterns = {
 
   { pat = ">=", icon = " "},
 
-  { pat = ">=", icon = " " },
+  { pat = "<=", icon = " " },
 
   { pat = "!=", icon = " "},
 
