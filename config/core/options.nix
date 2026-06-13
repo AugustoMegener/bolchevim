@@ -122,16 +122,17 @@ local function apply(bufnr, top, bot)
         while true do
           local start, finish = line:find(entry.pat, s, true)
           if not start then break end
-local hl = get_hl(bufnr, lnum, start - 1)
-vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
-  end_col = finish,
-  virt_text = {{ entry.icon, "" }},
-  virt_text_pos = "overlay",
-  conceal = "",
-  hl_group = vim.fn.synIDattr(vim.fn.synID(lnum + 1, start, 1), "name"),
-  hl_mode = "combine",
-  ephemeral = true,
-})
+
+          local hl_name = vim.fn.synIDattr(vim.fn.synID(lnum + 1, start, 1), "name")
+          if hl_name == "" then hl_name = "Normal" end
+
+          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
+            end_col = finish,
+            virt_text = {{ entry.icon, hl_name }},
+            virt_text_pos = "overlay",
+            conceal = "",
+            ephemeral = true,
+          })
           s = finish + 1
         end
       end
