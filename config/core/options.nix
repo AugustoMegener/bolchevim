@@ -101,7 +101,15 @@ local patterns = {
   { pat = "!=", icon = " "},
 
 }
-
+local function get_hl(bufnr, lnum, col)
+  local ok, captures = pcall(vim.treesitter.get_captures_at_pos, bufnr, lnum, col)
+  if ok and #captures > 0 then
+    return "@" .. captures[#captures].capture
+  end
+  local syn = vim.fn.synIDattr(vim.fn.synID(lnum + 1, col + 1, 1), "name")
+  if syn ~= "" then return syn end
+  return ""
+end
 local function apply(bufnr, top, bot)
   vim.api.nvim_buf_clear_namespace(bufnr, ns, top, bot)
   local lines = vim.api.nvim_buf_get_lines(bufnr, top, bot, false)
@@ -115,12 +123,13 @@ local function apply(bufnr, top, bot)
         while true do
           local start, finish = line:find(entry.pat, s, true)
           if not start then break end
-          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
-            end_col = finish,
-            conceal = "",
-            virt_text = {{ entry.icon, "" }},
-            virt_text_pos = "inline",
-          })
+local hl = get_hl(bufnr, lnum, start - 1)
+vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
+  end_col = finish,
+  conceal = "",
+  virt_text = {{ entry.icon, hl }},
+  virt_text_pos = "inline",
+})
           s = finish + 1
         end
       end
