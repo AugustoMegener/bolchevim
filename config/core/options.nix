@@ -129,7 +129,7 @@ local function apply(bufnr, top, bot)
           vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
             end_col = finish,
             virt_text = {{ entry.icon, hl_name }},
-            virt_text_pos = "overlay",
+            virt_text_pos = "inline",
             conceal = "",
             ephemeral = true,
           })
