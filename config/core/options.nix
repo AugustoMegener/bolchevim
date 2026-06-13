@@ -6,6 +6,7 @@
   };
 
   opts = {
+    concealcursor = "nvic";
     number = true;
     relativenumber = true;
     cursorline = true;
