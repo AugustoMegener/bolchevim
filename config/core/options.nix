@@ -110,10 +110,11 @@ local function get_hl(bufnr, lnum, col)
   if syn ~= "" then return syn end
   return ""
 end
-local function apply(bufnr, top, bot)
+local function apply(bufnr, top, bot, winid)
   vim.api.nvim_buf_clear_namespace(bufnr, ns, top, bot)
   local lines = vim.api.nvim_buf_get_lines(bufnr, top, bot, false)
-  local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
+  local ok, cursor = pcall(vim.api.nvim_win_get_cursor, winid)
+  local cursor_row = ok and (cursor[1] - 1) or -1
 
   for i, line in ipairs(lines) do
     local lnum = top + i - 1
@@ -123,13 +124,13 @@ local function apply(bufnr, top, bot)
         while true do
           local start, finish = line:find(entry.pat, s, true)
           if not start then break end
-local hl = get_hl(bufnr, lnum, start - 1)
-vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
-  end_col = finish,
-  conceal = "",
-  virt_text = {{ entry.icon, hl }},
-  virt_text_pos = "inline",
-})
+          local hl = get_hl(bufnr, lnum, start - 1)
+          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
+            end_col = finish,
+            conceal = "",
+            virt_text = {{ entry.icon, hl }},
+            virt_text_pos = "inline",
+          })
           s = finish + 1
         end
       end
@@ -138,8 +139,8 @@ vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, start - 1, {
 end
 
 vim.api.nvim_set_decoration_provider(ns, {
-  on_win = function(_, _, bufnr, topline, botline)
-    apply(bufnr, topline, botline)
+  on_win = function(_, winid, bufnr, topline, botline)
+    apply(bufnr, topline, botline, winid)
   end,
 })
 '';
