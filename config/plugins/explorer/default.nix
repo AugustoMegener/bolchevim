@@ -40,4 +40,16 @@
       };
     };
   };
+  
+  extraConfigLua = ''
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionCreate",
+  callback = function(event)
+    local entry = event.data
+    if entry.to then
+      vim.fn.jobstart({ "git", "add", entry.to }, { detach = true })
+    end
+  end,
+})
+  '';
 }
