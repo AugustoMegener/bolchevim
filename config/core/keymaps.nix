@@ -165,6 +165,10 @@
       action = ":s/";
     }
 
-
+    {
+      mode = "n";
+      key = "<Space><Space>";
+      action = "<cmd>Compile<cr>";
+    }
   ];
 }

@@ -23,5 +23,6 @@
     ./smear-cursor
     ./which-key
     ./fzf-lua
+    ./compile-mode
   ];
 }
