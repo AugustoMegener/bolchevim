@@ -170,5 +170,20 @@
       key = "<Space><Space>";
       action = "<cmd>Compile<cr>";
     }
+    {
+      mode = "n";
+      key = "<leader>mc";
+      action = "<cmd>MCstart<cr>";
+    }
+    {
+      mode = "v";
+      key = "<leader>mc";
+      action = "<cmd>MCvisual<cr>";
+    }
+    {
+      mode = "v";
+      key = "<leader>m/";
+      action = "<cmd>MCpatern<cr>";
+    }
   ];
 }
