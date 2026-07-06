@@ -19,6 +19,7 @@
     ./image
     ./firenvim
     ./vim-move
+    ./improved-ansiesc
     ./dashboard
     ./smear-cursor
     ./which-key
