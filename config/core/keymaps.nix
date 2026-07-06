@@ -50,21 +50,25 @@
       mode = "n";
       key = "<leader>gc";
       action = lib.nixvim.mkRaw ''
-        function()
-          local out = vim.fn.systemlist(
-            "tmux display -p '#{window_width} #{window_height}'"
-          )[1]
-          local w, h = out:match("(%d+)%s+(%d+)")
-          w, h = tonumber(w), tonumber(h)
+function()
+  local out = vim.fn.systemlist(
+    "tmux display -p '#{window_width} #{window_height}'"
+  )[1]
+  local w, h = out:match("(%d+)%s+(%d+)")
+  w, h = tonumber(w), tonumber(h)
 
-          local flag = (w > h * 2) and "-h" or "-v"
+  local flag = (w > h * 2) and "-h" or "-v"
 
-          vim.fn.system({
-            'tmux', 'split-window', flag,
-            '-c', vim.fn.getcwd(),
-            'git', 'commit'
-          })
-        end
+  local result = vim.fn.system({
+    'tmux', 'split-window', flag,
+    '-c', vim.fn.getcwd(),
+    'git', 'commit'
+  })
+
+  if vim.v.shell_error ~= 0 then
+    vim.notify(result, vim.log.levels.ERROR)
+  end
+end
       '';
     }
     {

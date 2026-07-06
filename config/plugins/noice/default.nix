@@ -24,7 +24,7 @@
         };
       };
       views = {
-        mini = {
+        ini = {
           win_options = {
             winblend = 0;
           };
