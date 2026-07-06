@@ -3,4 +3,5 @@
   extraPlugins = with pkgs.vimPlugins; [
     firenvim
   ];
+    
 }

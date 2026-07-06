@@ -56,14 +56,13 @@ function()
   )[1]
   local w, h = out:match("(%d+)%s+(%d+)")
   w, h = tonumber(w), tonumber(h)
-
   local flag = (w > h * 2) and "-h" or "-v"
 
   local result = vim.fn.system({
     'tmux', 'split-window', flag,
     '-c', vim.fn.getcwd(),
-    'git', 'commit'
-  })
+  #   'sh', '-c', 'git commit; read -n 1 -s -r'
+  # })
 
   if vim.v.shell_error ~= 0 then
     vim.notify(result, vim.log.levels.ERROR)
