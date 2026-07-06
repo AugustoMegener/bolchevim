@@ -6,6 +6,7 @@ in
 
   extraPackages = [
     pkgs.qt6.qtdeclarative
+     pkgs.bash-language-server           
   ];
 
   plugins.lsp = {
@@ -60,6 +61,16 @@ in
           "default.nix"
         ];
       };
+
+      bashls = {
+       enable = true;
+        settings = {
+          command = [ "bash-language-server" "start" ];
+          filetypes = [ "bash" "sh" ];
+
+        };
+      };
+
 
       kotlin_lsp = {
         enable = false;

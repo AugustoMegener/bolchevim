@@ -61,8 +61,8 @@ function()
   local result = vim.fn.system({
     'tmux', 'split-window', flag,
     '-c', vim.fn.getcwd(),
-  #   'sh', '-c', 'git commit; read -n 1 -s -r'
-  # })
+     'sh', '-c', 'git commit; read -n 1 -s -r'
+  })
 
   if vim.v.shell_error ~= 0 then
     vim.notify(result, vim.log.levels.ERROR)
@@ -181,6 +181,12 @@ end
       mode = "v";
       key = "\\";
       action = ":s/";
+    }
+
+    {
+      mode = "n";
+      key = "<A-Space>";
+      action = "<cmd>Recompile<cr>";
     }
 
     {

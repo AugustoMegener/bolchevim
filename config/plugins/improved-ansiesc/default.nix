@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   extraPlugins = [
-    pkgs.vimPlugins.vim-move
+    pkgs.vimPlugins.Improved-AnsiEsc
   ];
 }
