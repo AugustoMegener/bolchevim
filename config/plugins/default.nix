@@ -25,5 +25,6 @@
     ./fzf-lua
     ./compile-mode
     ./multicursor
+    ./vgit
   ];
 }

@@ -42,15 +42,30 @@
       key = "<leader>fh";
       action = "<cmd>Telescope help_tags<cr>";
     }
-    {
-      mode = "n";
-      key = "<leader>gs";
-      action = "<cmd>Telescope git_status<cr>";
-    }
+#    { mode = "n";
+#      key = "<leader>gs";
+#      action = "<cmd>Telescope git_status<cr>";
+#    }
     {
       mode = "n";
       key = "<leader>gc";
-      action = "<cmd>Telescope git_commits<cr>";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local out = vim.fn.systemlist(
+            "tmux display -p '#{window_width} #{window_height}'"
+          )[1]
+          local w, h = out:match("(%d+)%s+(%d+)")
+          w, h = tonumber(w), tonumber(h)
+
+          local flag = (w > h * 2) and "-h" or "-v"
+
+          vim.fn.system({
+            'tmux', 'split-window', flag,
+            '-c', vim.fn.getcwd(),
+            'git', 'commit'
+          })
+        end
+      '';
     }
     {
       mode = "n";
@@ -59,17 +74,17 @@
     }
     {
       mode = "n";
-      key = "<leader>gd";
+      key = "<leader>ld";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.definition() end";
     }
     {
       mode = "n";
-      key = "<leader>gr";
+      key = "<leader>lr";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.references() end";
     }
     {
       mode = "n";
-      key = "<leader>gi";
+      key = "<leader>li";
       action = lib.nixvim.mkRaw "function() vim.lsp.buf.implementation() end";
     }
     {
