@@ -7,6 +7,7 @@ in
   extraPackages = [
     pkgs.qt6.qtdeclarative
      pkgs.bash-language-server           
+    pkgs.jdk21
   ];
 
   plugins.lsp = {
@@ -41,10 +42,21 @@ in
         };
       };
 
-      rust_analyzer = {
+      rust_analyzer =  {
         enable = true;
         installCargo = false;
         installRustc = false;
+
+        settings = {
+          cargo = {
+            buildScripts = {
+              enable = true;
+            };
+          };
+          procMacro = {
+            enable = true;
+          };
+        };
       };
       
       qmlls = {
@@ -72,23 +84,10 @@ in
       };
 
 
-      kotlin_lsp = {
-        enable = false;
-        package = kotlinLsp;
-        extraOptions = {
-          init_options = {
-            kotlinLSP = {
-              jdkForSymbolResolution = "${pkgs.jdk21}";
-            };
-          };
-          on_attach = lib.nixvim.mkRaw ''
-            function(client, bufnr)
-              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            end
-          '';
-        };
-      };
-
+kotlin_lsp = {
+  enable = true;
+  package = kotlinLsp;
+};
       vtsls = {
         enable = true;
         rootMarkers = [

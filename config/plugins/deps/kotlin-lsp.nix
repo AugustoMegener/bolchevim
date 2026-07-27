@@ -3,35 +3,61 @@
   stdenvNoCC,
   fetchzip,
   makeWrapper,
-  jdk21,
   autoPatchelfHook,
+  lib,
+  wayland,
+  libxkbcommon,
+  libX11,
+  libXext,
+  libXi,
+  libXrender,
+  libXtst,
+  freetype,
+  zlib,
+  alsa-lib,
   ...
 }:
+
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "kotlin-lsp";
-  version = "262.2310.0";
+  version = "262.8190.0";
 
   src = fetchzip {
-    url = "https://download-cdn.jetbrains.com/kotlin-lsp/${finalAttrs.version}/kotlin-lsp-${finalAttrs.version}-linux-x64.zip";
-    sha256 = "sha256-Bf2qkFpNhQC/Mz563OapmCXeKN+dTrYyQbOcF6z6b48=";
+    url = "https://download-cdn.jetbrains.com/language-server/kotlin-server/262.8190.0/kotlin-server-262.8190.0.tar.gz";
+    sha256 = "sha256-tGqU5h1IKi2fZy+oBN/GjujbIMMg4AKlbBKw3D9NU5Y=";
     stripRoot = false;
   };
 
-  nativeBuildInputs = [ makeWrapper autoPatchelfHook ];
-  buildInputs = [ jdk21 stdenv.cc.cc.lib ];
+  nativeBuildInputs = [
+    makeWrapper
+    autoPatchelfHook
+  ];
 
-  installPhase = ''
-    runHook preInstall
+  buildInputs = [
+    stdenv.cc.cc.lib
+    wayland
+    libxkbcommon
+    libX11
+    libXext
+    libXi
+    libXrender
+    libXtst
+    freetype
+    zlib
+    alsa-lib
+  ];
 
-    mkdir -p $out/{bin,share}
-    cp -r lib native kotlin-lsp.sh $out/share
+installPhase = ''
+  mkdir -p $out/share
+  mkdir -p $out/bin
 
-    chmod +x $out/share/kotlin-lsp.sh
-    substituteInPlace $out/share/kotlin-lsp.sh \
-      --replace-fail 'LOCAL_JRE_PATH="$DIR/jre/Contents/Home"' 'LOCAL_JRE_PATH="${jdk21}"' \
-      --replace-fail 'LOCAL_JRE_PATH="$DIR/jre"' 'LOCAL_JRE_PATH="${jdk21}"'
-    makeWrapper $out/share/kotlin-lsp.sh $out/bin/kotlin-lsp
+  mv kotlin-server-${finalAttrs.version} $out/share/
 
-    runHook postInstall
-  '';
+  chmod +x $out/share/kotlin-server-${finalAttrs.version}/bin/intellij-server
+
+  makeWrapper \
+    $out/share/kotlin-server-${finalAttrs.version}/bin/intellij-server \
+    $out/bin/intellij-server \
+    --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath finalAttrs.buildInputs}
+'';
 })

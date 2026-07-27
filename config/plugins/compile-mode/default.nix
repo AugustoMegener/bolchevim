@@ -19,7 +19,13 @@ in
 
   extraConfigLua = ''
     vim.g.compile_mode = {
-      default_command = "nix run ",
+      default_command = function()
+        local ft = vim.bo.filetype;
+        if ft == "java" or ft == "kotlin" then
+          return "gradle "
+        end
+        return "nix run "
+      end,
     }
   '';
 }
