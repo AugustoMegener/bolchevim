@@ -32,31 +32,31 @@
         custom_areas = {
           left = lib.nixvim.mkRaw ''
             function()
-              return { { text = "", fg = "#2b2622", bg = "#302b24" } }
+              return { { text = "", fg = "#26211c", bg = "#2e261f" } }
             end
           '';
           right = lib.nixvim.mkRaw ''
             function()
-              return { { text = "", fg = "#2b2622", bg = "#302b24" } }
+              return { { text = "", fg = "#26211c", bg = "#2e261f" } }
             end
           '';
         };
       };
       highlights = {
-        fill = { bg = "#2b2622"; };
-        background = { fg = "#866f51"; bg = "#2b2622"; };
-        buffer_visible = { fg = "#866f51"; bg = "#2b2622"; };
-        buffer_selected = { fg = "#da9a22"; bg = "#302b24"; bold = true; italic = false; };
-        separator = { fg = "#383028"; bg = "#2b2622"; };
-        separator_selected = { fg = "#383028"; bg = "#302b24"; };
-        separator_visible = { fg = "#383028"; bg = "#2b2622"; };
-        indicator_selected = { fg = "#da9a22"; bg = "#302b24"; underline = true; sp = "#da9a22"; };
-        modified = { fg = "#da9a22"; bg = "#2b2622"; };
-        modified_selected = { fg = "#da9a22"; bg = "#302b24"; };
-        tab = { fg = "#866f51"; bg = "#2b2622"; };
-        tab_selected = { fg = "#da9a22"; bg = "#302b24"; };
-        tab_separator = { fg = "#383028"; bg = "#2b2622"; };
-        tab_separator_selected = { fg = "#383028"; bg = "#302b24"; };
+        fill = { bg = "#26211c"; };
+        background = { fg = "#866f51"; bg = "#26211c"; };
+        buffer_visible = { fg = "#866f51"; bg = "#26211c"; };
+        buffer_selected = { fg = "#da9a22"; bg = "#2e261f"; bold = true; italic = false; };
+        separator = { fg = "#383028"; bg = "#26211c"; };
+        separator_selected = { fg = "#383028"; bg = "#2e261f"; };
+        separator_visible = { fg = "#383028"; bg = "#26211c"; };
+        indicator_selected = { fg = "#da9a22"; bg = "#2e261f"; underline = true; sp = "#da9a22"; };
+        modified = { fg = "#da9a22"; bg = "#26211c"; };
+        modified_selected = { fg = "#da9a22"; bg = "#2e261f"; };
+        tab = { fg = "#866f51"; bg = "#26211c"; };
+        tab_selected = { fg = "#da9a22"; bg = "#2e261f"; };
+        tab_separator = { fg = "#383028"; bg = "#26211c"; };
+        tab_separator_selected = { fg = "#383028"; bg = "#2e261f"; };
       };
     };
   };

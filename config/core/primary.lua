@@ -1,19 +1,19 @@
 local M = {}
 
 M.colors = {
-    bg        = "#302b24",
-    bg1       = "#2b2622",
+    bg        = "#2e261f",
+    bg1       = "#26211c",
     bg2       = "#46392d",
     bg3       = "#57473a",
-    fg        = "#d5bea1",
-    fg_dim    = "#a08060",
-    red       = "#f25146",
+    fg        = "#d7c0a3",
+    fg_dim    = "#866f50",
+    red       = "#f35044",
     orange    = "#ed863b",
     yellow    = "#da9a22",
     green     = "#4fc48d",
     teal      = "#4fc48d",
     blue      = "#4396b7",
-    purple    = "#6260c1",
+    purple    = "#8a87d9",
     none      = "NONE",
 }
 

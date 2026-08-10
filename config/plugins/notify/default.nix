@@ -3,7 +3,7 @@
   plugins.notify = {
     enable = true;
     settings = {
-      background_colour = "#2b2622";
+      background_colour = "#26211c";
       timeout = 3000;
       max_height = lib.nixvim.mkRaw ''
         function()

@@ -1,4 +1,4 @@
-local ws_colors = { "#da9a22", "#f25146", "#4396b7" }
+local ws_colors = { "#da9a22", "#f35044", "#4396b7" }
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
@@ -30,14 +30,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
       vim.api.nvim_set_hl(0, "BufferLineIndicatorSelected", {
         fg = color,
-        bg = "#302b24",
+        bg = "#2e261f",
         underline = true,
         sp = color,
       })
 
       vim.api.nvim_set_hl(0, "BufferLineBufferSelected", {
         fg = color,
-        bg = "#302b24",
+        bg = "#2e261f",
         bold = true,
         italic = false,
         underline = true,

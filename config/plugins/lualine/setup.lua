@@ -1,13 +1,13 @@
 local colors = {
   fg0 = "#ead9c5",
-  bg1 = "#40392d",
+  bg1 = "#342c23",
   bg3 = "#312b24",
   blue = "#4eb0cf",
   aqua = "#689d6a",
   green = "#6bc99d",
   orange = "#f29554",
   purple = "#9595d9",
-  red = "#f25146",
+  red = "#f35044",
   yellow = "#e3a824",
 }
 
@@ -128,7 +128,7 @@ local mode_cursor_colors = {
   v = "#9595d9",
   V = "#9595d9",
   ["\22"] = "#9595d9",
-  R = "#f25146",
+  R = "#f35044",
   c = "#e3a824",
 }
 
