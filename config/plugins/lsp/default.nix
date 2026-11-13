@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
-let
+/*let
   kotlinLsp = pkgs.callPackage ../deps/kotlin-lsp.nix { };
-in
+in*/
 {
 
   extraPackages = [
@@ -84,10 +84,10 @@ in
       };
 
 
-kotlin_lsp = {
+/*kotlin_lsp = {
   enable = true;
   package = kotlinLsp;
-};
+};*/
       vtsls = {
         enable = true;
         rootMarkers = [
